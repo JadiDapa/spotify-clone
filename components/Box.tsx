@@ -1,14 +1,15 @@
 import { cn } from "@/lib/utils";
+import { FC } from "react";
 
-export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-function Box({ className, ...props }: BadgeProps) {
+const Box: FC<BoxProps> = ({ className, ...props }) => {
   return (
     <div
-      className={cn("bg-neutral-900 rounded-lg h-fit w-full", className)}
+      className={cn("h-fit w-full rounded-lg bg-neutral-900", className)}
       {...props}
     />
   );
-}
+};
 
 export default Box;
