@@ -7,6 +7,7 @@ import { useUser } from "@/hooks/useUser";
 import useUploadModal from "@/hooks/useUploadModal";
 import { Song } from "@/types";
 import MediaItem from "./MediaItem";
+import useOnPlay from "@/hooks/useOnPlay";
 
 export interface LibraryProps extends React.HTMLAttributes<HTMLDivElement> {
   songs: Song[];
@@ -16,6 +17,8 @@ function Library({ songs, className, ...props }: LibraryProps) {
   const authModal = useAuthModal();
   const uploadModal = useUploadModal();
   const { user } = useUser();
+
+  const onPlay = useOnPlay(songs);
   const onClick = () => {
     if (!user) {
       return authModal.onOpen();
@@ -39,7 +42,11 @@ function Library({ songs, className, ...props }: LibraryProps) {
       </div>
       <div className="mt-4 flex flex-col gap-y-2 px-3">
         {songs.map((song) => (
-          <MediaItem key={song.id} onClick={() => {}} song={song} />
+          <MediaItem
+            key={song.id}
+            onClick={(id: string) => onPlay(id)}
+            song={song}
+          />
         ))}
       </div>
     </div>
