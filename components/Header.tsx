@@ -14,6 +14,7 @@ import Button from "./Button";
 import { supabase } from "@supabase/auth-ui-shared";
 import { FaUserAlt } from "react-icons/fa";
 import { toast } from "react-hot-toast";
+import Link from "next/link";
 
 export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -56,12 +57,18 @@ const Header: React.FC<HeaderProps> = ({ className, children, ...props }) => {
           </button>
         </div>
         <div className="flex items-center gap-x-2 md:hidden">
-          <button className="flex items-center justify-center rounded-full bg-white p-2 transition hover:opacity-75">
+          <Link
+            href={"/"}
+            className="flex items-center justify-center rounded-full bg-white p-2 transition hover:opacity-75"
+          >
             <HiHome size={20} className="text-black" />
-          </button>
-          <button className="flex items-center justify-center rounded-full bg-white p-2 transition hover:opacity-75">
+          </Link>
+          <Link
+            href={"/search"}
+            className="flex items-center justify-center rounded-full bg-white p-2 transition hover:opacity-75"
+          >
             <BiSearch size={20} className="text-black" />
-          </button>
+          </Link>
         </div>
         <div className="flex items-center justify-between gap-x-4">
           {user ? (
