@@ -7,12 +7,14 @@ import { HiHome } from "react-icons/hi";
 import Box from "./Box";
 import SidebarItem from "./SidebarItem";
 import Library from "./Library";
+import { Song } from "@/types";
 
 interface SidebarProps {
+  songs: Song[];
   children: ReactNode;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ children }) => {
+const Sidebar: React.FC<SidebarProps> = ({ songs, children }) => {
   const pathname = usePathname();
 
   const routes = useMemo(
@@ -30,12 +32,12 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
         Icon: BiSearch,
       },
     ],
-    [pathname]
+    [pathname],
   );
 
   return (
     <aside className="flex h-full">
-      <div className="hidden md:flex flex-col gap-y-3 bg-black h-full w-[300px] p-2">
+      <div className="hidden h-full w-[300px] flex-col gap-y-3 bg-black p-2 md:flex">
         <Box>
           <div className="flex flex-col gap-y-4 px-5 py-4">
             {routes.map((item) => (
@@ -43,8 +45,8 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
             ))}
           </div>
         </Box>
-        <Box className="overflow-y-auto h-full">
-          <Library>Song Library</Library>
+        <Box className="h-full overflow-y-auto">
+          <Library songs={songs} />
         </Box>
       </div>
       <main className="h-full flex-1 overflow-y-auto py-2">{children}</main>
